@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agent Performance Analytics - Verified Leads CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#eef4fc",
+                    "inverse-primary": "#c3c0ff",
+                    "tertiary-fixed-dim": "#474747",
+                    "on-background": "#161c22",
+                    "on-secondary-fixed-variant": "#3b3b3b",
+                    "background": "#f6f9ff",
+                    "tertiary-container": "#747474",
+                    "surface": "#f6f9ff",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#d4d4d4",
+                    "surface-variant": "#dde3eb",
+                    "surface-dim": "#d4dbe2",
+                    "secondary-fixed": "#c6c6c6",
+                    "surface-container-high": "#e3e9f1",
+                    "on-tertiary-container": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#4d44e3",
+                    "on-secondary-fixed": "#1b1b1b",
+                    "on-primary-fixed-variant": "#e2dfff",
+                    "on-tertiary-fixed-variant": "#e2e2e2",
+                    "surface-container-highest": "#dde3eb",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#4d44e3",
+                    "tertiary-fixed": "#5e5e5e",
+                    "on-tertiary-fixed": "#ffffff",
+                    "on-error-container": "#410002",
+                    "surface-bright": "#f6f9ff",
+                    "on-surface": "#161c22",
+                    "outline-variant": "#c6c6c6",
+                    "on-surface-variant": "#474747",
+                    "tertiary": "#3b3b3b",
+                    "on-primary": "#e2dfff",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#3323cc",
+                    "on-primary-container": "#ffffff",
+                    "secondary": "#5e5e5e",
+                    "outline": "#777777",
+                    "on-secondary-container": "#1b1b1b",
+                    "primary-container": "#2606c2",
+                    "inverse-surface": "#2b3137",
+                    "surface-container": "#e8eef6",
+                    "inverse-on-surface": "#ebf1f9",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#ababab",
+                    "on-primary-fixed": "#ffffff",
+                    "on-tertiary": "#e2e2e2",
+                    "primary": "#000000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter", "sans-serif"],
+                    "display": ["Inter", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f6f9ff; color: #161c22; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Ghost Border for interactive elements */
+        .ghost-border { border: 1px solid rgba(198, 198, 198, 0.2); }
+        
+        /* Thin ledger line for data separation */
+        .ledger-line-top { border-top: 1px solid #c6c6c6; }
+        .ledger-line-bottom { border-bottom: 1px solid #c6c6c6; }
+        
+        /* Ambient Shadow */
+        .ambient-shadow { box-shadow: 0px 12px 32px rgba(22, 28, 34, 0.04); }
+        
+        /* Gradient Button */
+        .btn-primary { background: linear-gradient(180deg, #4d44e3 0%, #3323cc 100%); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-on-surface antialiased">
+<!-- SideNavBar (Web) -->
+<nav class="hidden md:flex flex-col h-full py-6 w-64 bg-surface-container-lowest border-r border-outline-variant/20 shadow-[12px_0px_32px_rgba(22,28,34,0.02)] z-10">
+<div class="px-8 mb-10 flex flex-col gap-1">
+<h1 class="text-xl font-black text-primary tracking-tight">The Ledger</h1>
+<p class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-medium text-on-surface-variant">Agent Performance</p>
+</div>
+<ul class="flex flex-col gap-2 px-4 flex-grow">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#474747] hover:bg-surface-container-low hover:text-primary-fixed transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#474747] hover:bg-surface-container-low hover:text-primary-fixed transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+                    Leads
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-primary-fixed border-r-2 border-primary-fixed bg-surface-container-low font-bold text-sm" href="#">
+<span class="material-symbols-outlined text-lg fill">analytics</span>
+                    Performance
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#474747] hover:bg-surface-container-low hover:text-primary-fixed transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-lg">location_city</span>
+                    Inventory
+                </a>
+</li>
+<li class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#474747] hover:bg-surface-container-low hover:text-primary-fixed transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="px-6 mt-6">
+<button class="w-full btn-primary text-on-primary rounded-md py-3 px-4 font-medium text-sm flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span>
+                Capture Lead
+            </button>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative bg-surface">
+<!-- TopAppBar (Web & Mobile) -->
+<header class="flex justify-between items-center w-full px-6 md:px-10 py-4 md:py-6 bg-surface z-10 sticky top-0">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface p-2 -ml-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="md:hidden">
+<h1 class="text-lg font-bold uppercase tracking-[0.05em] text-primary">Verified Leads CRM</h1>
+</div>
+<h2 class="hidden md:block text-2xl font-bold tracking-tight text-primary">Performance Overview</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="hidden md:flex items-center bg-surface-container-lowest ghost-border rounded-md px-3 py-2 w-64 focus-within:border-primary-fixed focus-within:ring-1 focus-within:ring-primary-fixed transition-all">
+<span class="material-symbols-outlined text-outline text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm p-0 w-full placeholder:text-outline text-on-surface" placeholder="Search leads, agents..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-[#474747]">
+<button class="hover:text-primary-fixed transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-6 md:px-10 pb-20 md:pb-10">
+<div class="max-w-7xl mx-auto space-y-10">
+<!-- Time Filter (Editorial approach) -->
+<div class="flex justify-between items-end border-b border-outline-variant/30 pb-4">
+<div>
+<p class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-medium text-on-surface-variant mb-1">Reporting Period</p>
+<h3 class="text-lg font-semibold text-primary">Q3 2023 Performance</h3>
+</div>
+<div class="flex gap-4">
+<button class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">30D</button>
+<button class="text-sm font-bold text-primary-fixed border-b-2 border-primary-fixed pb-1">90D</button>
+<button class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">YTD</button>
+</div>
+</div>
+<!-- Primary Metrics Row (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg ambient-shadow flex flex-col gap-4 group hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-medium text-on-surface-variant">Total Leads</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary-fixed transition-colors">group</span>
+</div>
+<div class="mt-2">
+<span class="text-4xl font-black tracking-tight text-primary">1,244</span>
+</div>
+<div class="flex items-center gap-1 mt-auto">
+<span class="material-symbols-outlined text-[1rem] text-[#10b981]">trending_up</span>
+<span class="text-xs font-medium text-[#10b981]">+12.4%</span>
+<span class="text-xs text-on-surface-variant ml-1">vs last period</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg ambient-shadow flex flex-col gap-4 group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden">
+<div class="absolute right-0 top-0 w-1 h-full bg-primary-fixed"></div>
+<div class="flex justify-between items-start">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-medium text-on-surface-variant">Verified Leads</span>
+<span class="material-symbols-outlined text-primary-fixed">verified</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-4xl font-black tracking-tight text-primary">892</span>
+<span class="text-sm font-medium text-on-surface-variant">/ 1,244</span>
+</div>
+<div class="w-full bg-surface-variant h-1 rounded-full mt-auto">
+<div class="bg-primary-fixed h-1 rounded-full" style="width: 71%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-xs font-medium text-primary-fixed">71.7% Conversion Rate</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg ambient-shadow flex flex-col gap-4 group hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-medium text-on-surface-variant">Hot Leads</span>
+<span class="material-symbols-outlined text-[#ef4444]">local_fire_department</span>
+</div>
+<div class="mt-2">
+<span class="text-4xl font-black tracking-tight text-primary">156</span>
+</div>
+<div class="flex items-center gap-1 mt-auto">
+<span class="material-symbols-outlined text-[1rem] text-[#10b981]">trending_up</span>
+<span class="text-xs font-medium text-[#10b981]">+4.2%</span>
+<span class="text-xs text-on-surface-variant ml-1">vs last period</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-low p-6 rounded-lg ghost-border flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-medium text-on-surface-variant">Avg. Sentiment</span>
+<span class="material-symbols-outlined text-outline-variant">mood</span>
+</div>
+<div class="mt-2 flex items-center gap-3">
+<span class="text-2xl font-bold tracking-tight text-primary">High</span>
+<span class="px-2 py-1 bg-surface-container-lowest rounded-sm text-[0.6875rem] uppercase tracking-wider font-bold text-[#10b981] border border-[#10b981]/20">Positive</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-auto leading-relaxed">
+                            Sentiment is derived from recent interaction transcripts and email tone analysis.
+                        </p>
+</div>
+</div>
+<!-- Secondary Row: Pipeline & Demand -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Lead Pipeline Funnel (Tonal Steps) -->
+<div class="lg:col-span-2 space-y-6">
+<div class="flex items-baseline gap-3">
+<h3 class="text-[1.375rem] font-semibold text-primary">Lead Pipeline</h3>
+<span class="text-sm font-medium text-on-surface-variant">Conversion Flow</span>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-lg ambient-shadow">
+<div class="flex flex-col gap-2">
+<!-- Step 1 -->
+<div class="flex items-center w-full">
+<div class="w-48 shrink-0 text-right pr-6 border-r border-outline-variant/30 py-4">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-bold text-primary">New</span>
+<div class="text-sm text-on-surface-variant mt-1">1,244 leads</div>
+</div>
+<div class="flex-grow pl-6 py-4">
+<div class="h-10 bg-[#e8eef6] rounded-r-md w-full flex items-center px-4 relative overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-1 bg-primary-fixed/20"></div>
+<span class="text-xs font-bold text-primary opacity-50 ml-auto">100%</span>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-center w-full">
+<div class="w-48 shrink-0 text-right pr-6 border-r border-outline-variant/30 py-4">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-bold text-primary">Contacted</span>
+<div class="text-sm text-on-surface-variant mt-1">892 leads</div>
+</div>
+<div class="flex-grow pl-6 py-4">
+<div class="h-10 bg-[#dde3eb] rounded-r-md w-[71.7%] flex items-center px-4 relative overflow-hidden transition-all duration-1000">
+<div class="absolute left-0 top-0 h-full w-1 bg-primary-fixed/40"></div>
+<span class="text-xs font-bold text-primary opacity-60 ml-auto">71.7%</span>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-center w-full">
+<div class="w-48 shrink-0 text-right pr-6 border-r border-outline-variant/30 py-4">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-bold text-primary">Qualified</span>
+<div class="text-sm text-on-surface-variant mt-1">412 leads</div>
+</div>
+<div class="flex-grow pl-6 py-4">
+<div class="h-10 bg-[#c3c0ff] rounded-r-md w-[33.1%] flex items-center px-4 relative overflow-hidden transition-all duration-1000">
+<div class="absolute left-0 top-0 h-full w-1 bg-primary-fixed/60"></div>
+<span class="text-xs font-bold text-primary-fixed ml-auto">33.1%</span>
+</div>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex items-center w-full">
+<div class="w-48 shrink-0 text-right pr-6 border-r border-outline-variant/30 py-4">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-bold text-primary">Proposal</span>
+<div class="text-sm text-on-surface-variant mt-1">185 leads</div>
+</div>
+<div class="flex-grow pl-6 py-4">
+<div class="h-10 bg-[#4d44e3] rounded-r-md w-[14.8%] flex items-center px-4 relative overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] transition-all duration-1000">
+<span class="text-xs font-bold text-on-primary ml-auto">14.8%</span>
+</div>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="flex items-center w-full">
+<div class="w-48 shrink-0 text-right pr-6 border-r border-outline-variant/30 py-4">
+<span class="font-['Inter'] text-[0.75rem] uppercase tracking-[0.05em] font-bold text-primary">Closed</span>
+<div class="text-sm text-on-surface-variant mt-1">94 leads</div>
+</div>
+<div class="flex-grow pl-6 py-4">
+<div class="h-10 bg-[#161c22] rounded-r-md w-[7.5%] flex items-center px-4 relative overflow-hidden transition-all duration-1000">
+<span class="text-[0.65rem] font-bold text-white ml-auto">7.5%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Property Type Demand -->
+<div class="space-y-6">
+<div class="flex items-baseline gap-3">
+<h3 class="text-[1.375rem] font-semibold text-primary">Demand</h3>
+<span class="text-sm font-medium text-on-surface-variant">by Typology</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg ambient-shadow h-[calc(100%-3rem)] flex flex-col">
+<div class="flex-grow flex flex-col justify-center gap-5">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm font-medium text-primary">3BHK Premium</span>
+<span class="text-sm font-bold text-primary">42%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed h-full" style="width: 42%"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm font-medium text-primary">2BHK Standard</span>
+<span class="text-sm font-bold text-primary">28%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed/80 h-full" style="width: 28%"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm font-medium text-primary">Villas</span>
+<span class="text-sm font-bold text-primary">15%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed/60 h-full" style="width: 15%"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm font-medium text-primary">Commercial Space</span>
+<span class="text-sm font-bold text-primary">10%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed/40 h-full" style="width: 10%"></div>
+</div>
+</div>
+<!-- Bar 5 -->
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm font-medium text-primary">1BHK Compact</span>
+<span class="text-sm font-bold text-primary">5%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed/20 h-full" style="width: 5%"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/30 flex justify-between items-center">
+<span class="text-xs text-on-surface-variant">Based on active inquiries</span>
+<button class="text-xs font-bold text-primary-fixed uppercase tracking-wider hover:underline">View Details</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Third Row: Sentiment & Geo -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Sentiment Analysis -->
+<div class="space-y-6">
+<div class="flex items-baseline gap-3">
+<h3 class="text-[1.375rem] font-semibold text-primary">Sentiment Analysis</h3>
+<span class="text-sm font-medium text-on-surface-variant">Last 30 Days</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg ambient-shadow flex items-center h-48">
+<div class="w-1/3 flex justify-center border-r border-outline-variant/30">
+<div class="relative w-32 h-32 rounded-full border-8 border-surface-container-high flex items-center justify-center">
+<!-- Decorative circle segments -->
+<div class="absolute inset-[-8px] rounded-full border-8 border-transparent border-t-[#10b981] border-r-[#10b981] rotate-45"></div>
+<div class="absolute inset-[-8px] rounded-full border-8 border-transparent border-b-[#f59e0b] -rotate-12"></div>
+<div class="text-center">
+<span class="block text-2xl font-black text-primary">68%</span>
+<span class="block text-[0.65rem] uppercase tracking-wider font-bold text-[#10b981]">Positive</span>
+</div>
+</div>
+</div>
+<div class="w-2/3 pl-8 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#10b981]"></div>
+<span class="text-sm font-medium text-primary">Positive</span>
+</div>
+<span class="text-sm font-bold text-primary">68%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#f59e0b]"></div>
+<span class="text-sm font-medium text-primary">Neutral</span>
+</div>
+<span class="text-sm font-bold text-primary">22%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#ef4444]"></div>
+<span class="text-sm font-medium text-primary">Negative</span>
+</div>
+<span class="text-sm font-bold text-primary">10%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Geographic Hotspots -->
+<div class="space-y-6">
+<div class="flex items-baseline gap-3">
+<h3 class="text-[1.375rem] font-semibold text-primary">Geographic Hotspots</h3>
+<span class="text-sm font-medium text-on-surface-variant">Top Areas</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg ambient-shadow h-48 overflow-hidden flex">
+<!-- List -->
+<div class="w-1/2 p-0 flex flex-col">
+<div class="flex items-center justify-between px-6 py-3 border-b border-outline-variant/20 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold text-primary-fixed w-4">01</span>
+<span class="text-sm font-medium text-primary">Downtown Core</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm group-hover:text-primary-fixed">arrow_forward</span>
+</div>
+<div class="flex items-center justify-between px-6 py-3 border-b border-outline-variant/20 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold text-primary-fixed w-4">02</span>
+<span class="text-sm font-medium text-primary">Westside Tech Park</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm group-hover:text-primary-fixed">arrow_forward</span>
+</div>
+<div class="flex items-center justify-between px-6 py-3 border-b border-outline-variant/20 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold text-primary-fixed w-4">03</span>
+<span class="text-sm font-medium text-primary">Northern Suburbs</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm group-hover:text-primary-fixed">arrow_forward</span>
+</div>
+<div class="flex items-center justify-between px-6 py-3 hover:bg-surface-container-low transition-colors group cursor-pointer mt-auto">
+<span class="text-xs font-bold text-primary-fixed uppercase tracking-wider">View Full Map</span>
+</div>
+</div>
+<!-- Map placeholder -->
+<div class="w-1/2 bg-surface-dim relative border-l border-outline-variant/20">
+<img alt="Map view" class="w-full h-full object-cover opacity-60 mix-blend-multiply grayscale" data-alt="monochrome stylized city map view top down architectural style with subtle indigo data point overlays" data-location="City Center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMOyHpDZ_03IbVTBEdXOGZsZGNiFBxps2KLQllFZNPU2a4Ks52JAYEAh_TmP-46KbEQWhCcN_8fW5rC_Y8z3LWf8cdHi0cOrO9lvX80a41tBD_DDkMpbhZJAR2lJugEW8glr5X37MdeRRBlNF8FyWloZ6rzJIQLg5UKeDo3LmAnneP-0v2k6Aj5PH7gYg7Z9oQ3_f20zHMXd3bV9I4JEmcTIeK4OvQRLL0Oga2Yvl5U_GhNd7Y6y3h-VKPZDY8pGF3XRSTTVxvhKnc"/>
+<!-- Hotspot dots -->
+<div class="absolute top-[30%] left-[40%] w-3 h-3 bg-primary-fixed rounded-full shadow-[0_0_10px_rgba(77,68,227,0.8)] border-2 border-white"></div>
+<div class="absolute top-[60%] left-[20%] w-2 h-2 bg-primary-fixed rounded-full shadow-[0_0_10px_rgba(77,68,227,0.8)] border border-white"></div>
+<div class="absolute top-[50%] left-[70%] w-2.5 h-2.5 bg-primary-fixed rounded-full shadow-[0_0_10px_rgba(77,68,227,0.8)] border border-white"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

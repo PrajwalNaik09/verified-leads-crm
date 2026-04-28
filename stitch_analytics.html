@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Ledger - Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e4e1ee",
+                      "surface": "#fcf8ff",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#c3c0ff",
+                      "on-tertiary-container": "#ffd2be",
+                      "surface-bright": "#fcf8ff",
+                      "on-primary-container": "#dad7ff",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "tertiary-fixed": "#ffdbcc",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#ffb695",
+                      "secondary-container": "#b6b4ff",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#eae6f4",
+                      "surface-container-highest": "#e4e1ee",
+                      "on-surface-variant": "#464555",
+                      "surface-tint": "#4d44e3",
+                      "on-secondary-fixed-variant": "#413f82",
+                      "surface-dim": "#dcd8e5",
+                      "secondary-fixed": "#e2dfff",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#3525cd",
+                      "inverse-primary": "#c3c0ff",
+                      "on-secondary-container": "#454386",
+                      "primary-container": "#4f46e5",
+                      "tertiary": "#7e3000",
+                      "inverse-surface": "#302f39",
+                      "tertiary-container": "#a44100",
+                      "outline-variant": "#c7c4d8",
+                      "on-tertiary-fixed": "#351000",
+                      "on-background": "#1b1b24",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#e2dfff",
+                      "on-primary": "#ffffff",
+                      "outline": "#777587",
+                      "secondary": "#58579b",
+                      "on-primary-fixed": "#0f0069",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "on-surface": "#1b1b24",
+                      "background": "#fcf8ff",
+                      "surface-container-low": "#f5f2ff",
+                      "surface-container": "#f0ecf9",
+                      "inverse-on-surface": "#f3effc",
+                      "on-secondary-fixed": "#140f54"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Inter"],
+                      "display": ["Inter"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              },
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #c7c4d8; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex overflow-hidden">
+<!-- SideNavBar Integration -->
+<aside class="hidden md:flex flex-col h-screen w-64 bg-[#f5f2ff] dark:bg-slate-950 p-4 space-y-6 z-40 border-r border-outline-variant/10">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">domain</span>
+</div>
+<div>
+<h1 class="font-black text-indigo-700 dark:text-indigo-300 leading-tight">Digital Ledger</h1>
+<p class="font-inter label-sm uppercase tracking-widest text-[10px] text-on-surface-variant">Portfolio Manager</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2 pt-8">
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-indigo-500 hover:translate-x-1 transition-transform duration-200 font-inter label-sm uppercase tracking-widest text-[11px]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Leads</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-indigo-500 hover:translate-x-1 transition-transform duration-200 font-inter label-sm uppercase tracking-widest text-[11px]" href="#">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+<span>Properties</span>
+</a>
+<a class="flex items-center gap-3 p-3 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-300 rounded-lg font-bold shadow-sm font-inter label-sm uppercase tracking-widest text-[11px]" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 hover:text-indigo-500 hover:translate-x-1 transition-transform duration-200 font-inter label-sm uppercase tracking-widest text-[11px]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="pt-4 mt-auto">
+<button class="w-full bg-primary-container text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-lg shadow-indigo-200 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>New Listing</span>
+</button>
+<div class="mt-6 flex items-center gap-3 px-2 py-3 bg-surface-container-high/50 rounded-xl">
+<img alt="Ledger Admin" class="w-10 h-10 rounded-full object-cover" data-alt="Professional executive portrait of a real estate manager in a sharp navy suit with soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3Ma1TGijRRGmgOXlCQn9qTmP8yc6hiegh2cNXOz5roBGadfQhQgP99fdNsKaLqll-UN4ysoPEqL_6Nqh4acectvCtiOwCjUJY0cDcusyAnZiDMeE2_o89u05F_UpdPjzgKU1ltf7n9zyYqLU44MhAQz8yEhJsu0pYcAgkmBaIZ6Gcnp_DdN9JWp0aVt0tjt7_UJQ3lrLIoksE8RwOVNZwMoru1wDAqlbIat4SVxKbHjg5FXnLETR8pMr9i131U8y-Ve2VD563kxg"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">Ledger Admin</p>
+<p class="text-[10px] text-on-surface-variant truncate">Global Real Estate</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar Integration -->
+<header class="bg-[#ffffff]/80 dark:bg-slate-900/80 backdrop-blur-lg sticky top-0 z-50 flex justify-between items-center w-full px-8 py-3 shadow-[0px_12px_32px_rgba(27,27,36,0.04)]">
+<div class="flex items-center gap-6 flex-1">
+<div class="flex items-center bg-[#f5f2ff] dark:bg-slate-800 rounded-lg px-4 py-2 w-full max-w-md group focus-within:ring-2 ring-primary-container/20 transition-all">
+<span class="material-symbols-outlined text-slate-400 mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-inter font-medium tracking-tight" placeholder="Search analytics or properties..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2 mr-4 border-r border-outline-variant/30 pr-4">
+<button class="p-2 text-slate-500 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20 rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-semibold text-slate-600 hidden lg:block">Quarterly Performance</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="Executive User Profile" class="w-full h-full object-cover" data-alt="Close-up of a smiling male executive with glasses in a professional business setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl6i7W4IwhR9EJGvpMSy-IQviwj1LRMpQjQV0CPrVSbMIGT-flWv0K4wOr9tPApBKS0C2VDd3OKQHP8IhEudUu5DmWtlQ5Z1O0CWpKPjj594gsT0zrVhrZ4Bqvg-9cZklGDbDfpJ5GLLb4KqwuxoDwcg6JKzsYyhTeJMw0fiXeH-GRdAyZRxf1Jmt4x6rFEh2FMu9kpfoy9eN5ucE06JYHE5NxOmKYR_KthOYGOm82p0r92w1umrGwaJHpCd-BBzDKVncGLj6yviI"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Analytics Content Canvas -->
+<div class="flex-1 overflow-y-auto p-8 bg-surface space-y-8">
+<!-- Dashboard Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tighter text-indigo-700">Market Overview</h2>
+<p class="text-on-surface-variant font-medium text-sm">Real-time performance metrics for the Manhattan Luxury Portfolio.</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-lowest text-primary px-4 py-2 rounded-lg text-xs font-bold shadow-sm hover:bg-surface-container-low transition-colors">
+                        EXPORT REPORT
+                    </button>
+<button class="bg-primary-container text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                        LAST 30 DAYS
+                    </button>
+</div>
+</section>
+<!-- KPI Metrics: Tonal Stacking -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Total Leads -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_16px_rgba(27,27,36,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Total Leads</span>
+<span class="material-symbols-outlined text-primary-container">group</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-bold tracking-tight">2,842</span>
+<span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> 12%
+                        </span>
+</div>
+</div>
+<!-- Verified Leads -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_16px_rgba(27,27,36,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Verified Leads</span>
+<span class="material-symbols-outlined text-primary-container">verified</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-bold tracking-tight">1,105</span>
+<span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> 8.4%
+                        </span>
+</div>
+</div>
+<!-- Hot Leads -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_16px_rgba(27,27,36,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Hot Leads</span>
+<span class="material-symbols-outlined text-error">local_fire_department</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-bold tracking-tight">432</span>
+<span class="text-xs font-bold text-error bg-error-container px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">priority_high</span> High Value
+                        </span>
+</div>
+</div>
+</section>
+<!-- Main Bento Grid -->
+<section class="grid grid-cols-12 gap-6 pb-8">
+<!-- Conversion Funnel (Asymmetric Large Block) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low p-8 rounded-2xl relative overflow-hidden">
+<h3 class="text-lg font-bold mb-8">Lead Conversion Funnel</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="w-24 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Impressions</div>
+<div class="flex-1 h-10 bg-primary-container/10 rounded-lg overflow-hidden relative">
+<div class="absolute inset-y-0 left-0 bg-primary-container w-full opacity-20"></div>
+<div class="absolute inset-0 flex items-center px-4 font-bold text-xs">48.2k</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Leads</div>
+<div class="flex-1 h-10 bg-primary-container/10 rounded-lg overflow-hidden relative">
+<div class="absolute inset-y-0 left-0 bg-primary-container w-[65%] opacity-40"></div>
+<div class="absolute inset-0 flex items-center px-4 font-bold text-xs">2,842</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Contacted</div>
+<div class="flex-1 h-10 bg-primary-container/10 rounded-lg overflow-hidden relative">
+<div class="absolute inset-y-0 left-0 bg-primary-container w-[40%] opacity-70"></div>
+<div class="absolute inset-0 flex items-center px-4 font-bold text-xs">1,105</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-24 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Closed</div>
+<div class="flex-1 h-10 bg-primary-container/10 rounded-lg overflow-hidden relative">
+<div class="absolute inset-y-0 left-0 bg-primary w-[15%]"></div>
+<div class="absolute inset-0 flex items-center px-4 font-bold text-xs text-on-surface">142</div>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-10 -right-10 w-48 h-48 bg-indigo-500/5 rounded-full blur-3xl"></div>
+</div>
+<!-- Sentiment Indicators -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-highest p-6 rounded-2xl flex flex-col justify-between">
+<div>
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-6">Market Sentiment</h3>
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-3xl">trending_up</span>
+</div>
+<div>
+<p class="font-bold text-lg text-indigo-700">Bullish Trends</p>
+<p class="text-[11px] text-on-surface-variant">AI-Driven Prediction: +4.2% YoY</p>
+</div>
+</div>
+<p class="text-xs leading-relaxed text-on-surface-variant italic">
+                            "Buyer confidence remains robust in the Upper East Side, specifically for 3+ bedroom units. Inventory turnover is accelerating."
+                        </p>
+</div>
+<div class="mt-6 pt-6 border-t border-outline-variant/20">
+<div class="flex justify-between items-center text-[10px] font-bold text-on-surface-variant uppercase mb-2">
+<span>OPTIMISM INDEX</span>
+<span>84%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-indigo-500 to-indigo-300 w-[84%]"></div>
+</div>
+</div>
+</div>
+<!-- Geographic Distribution -->
+<div class="col-span-12 lg:col-span-7 h-[400px] bg-surface-container-low rounded-2xl overflow-hidden relative">
+<div class="absolute top-6 left-6 z-10 bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-lg">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Geographic Focus</h3>
+<p class="text-lg font-bold text-indigo-700">Manhattan Peak</p>
+<p class="text-[10px] font-medium text-green-600 mt-1 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600"></span> High Activity Zone
+                        </p>
+</div>
+<div class="w-full h-full bg-slate-200">
+<img alt="Map Visualization" class="w-full h-full object-cover grayscale opacity-60" data-alt="Minimalist abstract topographical map style overhead view of city streets with glowing blue heat map indicators" data-location="Manhattan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw5rKxIF2FFqN7Mkehu-80Piurpit84xXIrntEEvlCxjmDnzXIWZ6Q9b4f2d-DU0Y8lGGkg-2n-2Hq35HsvLVrNZ9nPZhDKgSmXvkR3b99zSvoz4GUAMNjGQBPO0xWfBs2YGdByk4Z95C0J8iJjFWfaWqUuk2kdJjDkp0rXC0Jg9yK0hNFzvDW33GhtjXjKhe6EX9P491q3IGhilhrgjobFyW_VXD8yKCHLhNaDC7v9N4rIPtko_bGipmd38-3CCZTQjL24OlRN8g"/>
+</div>
+<!-- Custom Map Markers -->
+<div class="absolute top-1/2 left-1/3 w-4 h-4 bg-primary rounded-full border-4 border-white shadow-xl"></div>
+<div class="absolute top-1/4 right-1/4 w-3 h-3 bg-primary/60 rounded-full border-2 border-white"></div>
+<div class="absolute bottom-1/3 left-1/2 w-3 h-3 bg-primary/60 rounded-full border-2 border-white"></div>
+</div>
+<!-- Property Demand Analysis -->
+<div class="col-span-12 lg:col-span-5 grid grid-rows-2 gap-6">
+<!-- Budget Ranges -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Budget Ranges</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium">$2M - $5M</span>
+<span class="text-xs font-bold text-primary">42%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[42%]"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium">$5M - $10M</span>
+<span class="text-xs font-bold text-primary">31%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[31%]"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium">$10M+</span>
+<span class="text-xs font-bold text-primary">27%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[27%]"></div>
+</div>
+</div>
+</div>
+<!-- Property Types -->
+<div class="bg-primary text-white p-6 rounded-2xl flex flex-col justify-between shadow-xl shadow-indigo-900/10">
+<h3 class="text-[10px] font-bold uppercase tracking-widest text-indigo-200">Top Property Type</h3>
+<div>
+<p class="text-2xl font-bold tracking-tight">Luxury Waterfront</p>
+<p class="text-xs text-indigo-100 mt-2">68% of new high-net-worth leads requested viewing for waterfront properties this month.</p>
+</div>
+<div class="flex -space-x-2 mt-4">
+<img class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="Modern luxury house by the water at sunrise" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYIj6JAHG636tdWOCrowGxoiPrAZ78yib_0zCriDEM53fuyDsHHAOVkYtksfYkfnzBFuS3DgMDdP4kgtWxLQ9PlmVQmKO44cG_z9-rcEsRXD4LfhMSIrcRhimZ5bCjKNgPqDgjftr4S21ZdT8YgzfeP962_N9qBQh_xWbV6j189dM7c7QoFgtur5eeZ7u03NnxvsZdCODTYuYMbneLmvz_EzWUOtf3FvqBkpmfgWINnBucP2RKZeX7Q0sXazK0449VwZo4fjgqaVM"/>
+<img class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="High-end penthouse interior with large windows and city view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0RHCoZLmTBZjem92ousGkTT4jJjWP5XaghGPIHMeC-hexcJ8vW5rJB3IE5QXU5u1eJtossjJqSi9psuInp7khapZ1kP2Z4GBTbVsCdA2Bav6ZwBZ4uCL16bmnIqGmI1zyr-lXniMbolG54p5mR1L_dOaibhn33WOKRp5XRt0-TypDnkeWiF7ccu7KqReICt3VchOFqdPR5mAr9A-DgJDX1TUlTuOBc6_jvb-sft5vXlt-XnlDiHMkYjpkLBwFHlXLHvsqiKc0jkQ"/>
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-indigo-400 flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

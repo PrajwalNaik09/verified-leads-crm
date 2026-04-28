@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Rounded Background -->
+  <rect width="512" height="512" rx="128" fill="#0f172a"/>
+  
+  <!-- Building Icon -->
+  <path d="M128 384V224L256 128l128 96v160H128z" fill="#ffffff"/>
+  
+  <!-- Door -->
+  <path d="M224 384V288h64v96" fill="#0f172a"/>
+
+  <!-- Verification Badge -->
+  <circle cx="384" cy="384" r="72" fill="#10b981"/>
+  <path d="M344 384l24 24 48-48" stroke="#ffffff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

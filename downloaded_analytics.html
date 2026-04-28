@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Real Estate OS - Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#474747",
+                    "on-surface-variant": "#474747",
+                    "on-error-container": "#410002",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#161c22",
+                    "inverse-on-surface": "#ebf1f9",
+                    "surface-variant": "#dde3eb",
+                    "on-tertiary": "#e2e2e2",
+                    "inverse-primary": "#c3c0ff",
+                    "tertiary": "#3b3b3b",
+                    "surface-dim": "#d4dbe2",
+                    "primary-fixed": "#4d44e3",
+                    "on-secondary-fixed-variant": "#3b3b3b",
+                    "on-error": "#ffffff",
+                    "secondary": "#5e5e5e",
+                    "surface": "#f6f9ff",
+                    "surface-container-high": "#e3e9f1",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "primary-fixed-dim": "#3323cc",
+                    "secondary-fixed-dim": "#ababab",
+                    "surface-container-low": "#eef4fc",
+                    "on-secondary-fixed": "#1b1b1b",
+                    "inverse-surface": "#2b3137",
+                    "outline-variant": "#c6c6c6",
+                    "on-primary-container": "#ffffff",
+                    "surface-tint": "#4d44e3",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#e2e2e2",
+                    "on-background": "#161c22",
+                    "secondary-fixed": "#c6c6c6",
+                    "secondary-container": "#d4d4d4",
+                    "on-primary-fixed-variant": "#e2dfff",
+                    "tertiary-fixed": "#5e5e5e",
+                    "on-primary-fixed": "#ffffff",
+                    "background": "#f6f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#e8eef6",
+                    "primary-container": "#2606c2",
+                    "on-tertiary-fixed": "#ffffff",
+                    "surface-bright": "#f6f9ff",
+                    "on-primary": "#e2dfff",
+                    "tertiary-container": "#747474",
+                    "outline": "#777777",
+                    "on-secondary-container": "#1b1b1b",
+                    "surface-container-highest": "#dde3eb",
+                    "primary": "#000000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "display": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ledger-line {
+            background-image: linear-gradient(to right, #c6c6c6 10%, rgba(255, 255, 255, 0) 0%);
+            background-position: bottom;
+            background-size: 8px 1px;
+            background-repeat: repeat-x;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body antialiased">
+<!-- Navigation Drawer (Desktop Only) -->
+<aside class="fixed left-0 top-0 hidden h-full w-64 flex-col border-r border-outline-variant/20 bg-surface-container-lowest p-6 md:flex z-40">
+<div class="mb-8 text-lg font-bold text-primary">REAL ESTATE OS</div>
+<nav class="flex flex-col space-y-1">
+<!-- Active Tab: Overview -->
+<a class="flex items-center gap-3 bg-surface-container-low border-l-2 border-primary-fixed py-3 px-4 text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em]">Overview</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 pl-6 text-on-surface-variant hover:bg-surface-container-low transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em]">Lead Pipeline</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 pl-6 text-on-surface-variant hover:bg-surface-container-low transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">home_work</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em]">Property Demand</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 pl-6 text-on-surface-variant hover:bg-surface-container-low transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">insert_emoticon</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em]">Sentiment</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 pl-6 text-on-surface-variant hover:bg-surface-container-low transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">map</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em]">Geographic</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img class="object-cover h-full w-full" data-alt="professional real estate agent headshot with a confident smile in business attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb3sOXF7At2-swLgiKo25YB5HcIazPgXzYEDAm-s1qUdrSiXfMpV9JJUsXAzGvkKqu7SU098c8aWfFff0MWkJiXSsXR-NWTYa-jWXrjS4Qa33DqanFnOE7TjDXu3GNKhYalKxEGzE1ilpBLPcB2lI7vxR343J7jkVQByaMdImeFvepW8tHbdpCzwpODKo84El_TNxm1IrJtQop3gwFNx5o6hI_h79vxJ95yfsjsHn5ta0leqeTdAzNZiqlKIXxgJywxTUYVyPs0Pbq"/>
+</div>
+<div class="flex flex-col">
+<span class="text-[12px] font-bold text-primary leading-tight">Agent Profile</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-wider">Premium Plan</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 z-30 flex h-16 w-full items-center justify-between border-b border-outline-variant/20 bg-surface px-6 md:pl-72">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="analytics">analytics</span>
+<h1 class="font-['Inter'] text-sm font-bold uppercase tracking-tight text-primary">LEDGER ANALYTICS</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg p-2 hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</button>
+<button class="flex items-center justify-center rounded-lg p-2 hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="min-h-screen pt-20 pb-24 md:pl-72 md:pb-8 pr-6 pl-6">
+<div class="mb-8">
+<h2 class="text-3xl font-black tracking-tighter text-primary uppercase">Analytics Overview</h2>
+<p class="text-[11px] font-medium uppercase tracking-[0.1em] text-on-surface-variant mt-1">Real-time performance ledger • Q4 FY24</p>
+</div>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest p-6 border-b border-outline-variant/20">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Total Leads</span>
+<span class="text-[10px] font-bold text-primary bg-primary-fixed/10 px-2 py-0.5 rounded-full">+12.4%</span>
+</div>
+<div class="text-4xl font-black tracking-tighter text-primary">1,244</div>
+<div class="mt-4 h-1 w-full bg-surface-container">
+<div class="h-1 bg-primary-fixed w-[72%]"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest p-6 border-b border-outline-variant/20">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Verified Leads</span>
+<span class="text-[10px] font-bold text-primary bg-primary-fixed/10 px-2 py-0.5 rounded-full">+8.1%</span>
+</div>
+<div class="text-4xl font-black tracking-tighter text-primary">892</div>
+<div class="mt-4 h-1 w-full bg-surface-container">
+<div class="h-1 bg-primary-fixed w-[60%]"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest p-6 border-b border-outline-variant/20">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Hot Leads</span>
+<span class="text-[10px] font-bold text-error bg-error-container px-2 py-0.5 rounded-full">+18.5%</span>
+</div>
+<div class="text-4xl font-black tracking-tighter text-primary">156</div>
+<div class="mt-4 h-1 w-full bg-surface-container">
+<div class="h-1 bg-error w-[45%]"></div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-lowest p-6 border-b border-outline-variant/20">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Avg. Sentiment</span>
+<span class="text-[10px] font-bold text-primary-fixed uppercase">High</span>
+</div>
+<div class="text-4xl font-black tracking-tighter text-primary uppercase">Positive</div>
+<div class="mt-4 flex gap-1">
+<div class="h-1 flex-1 bg-primary-fixed"></div>
+<div class="h-1 flex-1 bg-primary-fixed"></div>
+<div class="h-1 flex-1 bg-primary-fixed"></div>
+<div class="h-1 flex-1 bg-primary-fixed/20"></div>
+</div>
+</div>
+</div>
+<!-- Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Funnel Visualization (Left Column) -->
+<div class="lg:col-span-4 bg-surface-container-lowest p-8 flex flex-col border border-outline-variant/10">
+<div class="mb-8">
+<h3 class="text-xs font-black uppercase tracking-widest text-primary">Lead Pipeline Funnel</h3>
+<p class="text-[10px] text-on-surface-variant mt-1">Conversion Efficiency</p>
+</div>
+<div class="flex flex-col space-y-4">
+<div class="relative">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold uppercase">New Leads</span>
+<span class="text-[11px] font-bold">1,244</span>
+</div>
+<div class="h-12 w-full bg-primary relative overflow-hidden">
+<div class="absolute inset-0 bg-white/5 skew-x-[-20deg] translate-x-4"></div>
+</div>
+</div>
+<div class="flex justify-center -my-2 relative z-10">
+<span class="text-[10px] font-bold bg-surface-container text-primary px-2 py-0.5 rounded-full border border-outline-variant/20">82% Conv.</span>
+</div>
+<div class="relative">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold uppercase">Contacted</span>
+<span class="text-[11px] font-bold">1,020</span>
+</div>
+<div class="h-10 w-4/5 mx-auto bg-primary/90 relative overflow-hidden"></div>
+</div>
+<div class="flex justify-center -my-2 relative z-10">
+<span class="text-[10px] font-bold bg-surface-container text-primary px-2 py-0.5 rounded-full border border-outline-variant/20">45% Conv.</span>
+</div>
+<div class="relative">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold uppercase">Qualified</span>
+<span class="text-[11px] font-bold">459</span>
+</div>
+<div class="h-8 w-3/5 mx-auto bg-primary/80 relative overflow-hidden"></div>
+</div>
+<div class="flex justify-center -my-2 relative z-10">
+<span class="text-[10px] font-bold bg-surface-container text-primary px-2 py-0.5 rounded-full border border-outline-variant/20">28% Conv.</span>
+</div>
+<div class="relative">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold uppercase">Proposal</span>
+<span class="text-[11px] font-bold">128</span>
+</div>
+<div class="h-6 w-2/5 mx-auto bg-primary/70 relative overflow-hidden"></div>
+</div>
+<div class="flex justify-center -my-2 relative z-10">
+<span class="text-[10px] font-bold bg-primary-fixed text-white px-2 py-0.5 rounded-full shadow-lg">12% Closed</span>
+</div>
+<div class="relative">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold uppercase">Closed</span>
+<span class="text-[11px] font-bold">15</span>
+</div>
+<div class="h-4 w-1/5 mx-auto bg-primary-fixed relative overflow-hidden"></div>
+</div>
+</div>
+</div>
+<!-- Main Insights Column (Right/Middle) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Property Demand Bar Chart -->
+<div class="bg-surface-container-lowest p-8 border border-outline-variant/10">
+<div class="flex justify-between items-end mb-10">
+<div>
+<h3 class="text-xs font-black uppercase tracking-widest text-primary">Property Demand by Typology</h3>
+<p class="text-[10px] text-on-surface-variant mt-1">Market Sentiment Analysis</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5">
+<div class="w-2 h-2 bg-primary"></div>
+<span class="text-[9px] uppercase font-bold tracking-tighter">Interest</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="w-2 h-2 bg-outline-variant"></div>
+<span class="text-[9px] uppercase font-bold tracking-tighter">Supply</span>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<!-- 3BHK -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-[10px] font-bold uppercase">
+<span>3BHK Apartments</span>
+<span>88%</span>
+</div>
+<div class="h-4 w-full flex bg-surface-container">
+<div class="bg-primary w-[88%] h-full"></div>
+<div class="bg-outline-variant w-[12%] h-full ml-[1px]"></div>
+</div>
+</div>
+<!-- 2BHK -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-[10px] font-bold uppercase">
+<span>2BHK Apartments</span>
+<span>64%</span>
+</div>
+<div class="h-4 w-full flex bg-surface-container">
+<div class="bg-primary w-[64%] h-full"></div>
+<div class="bg-outline-variant w-[36%] h-full ml-[1px]"></div>
+</div>
+</div>
+<!-- Luxury Villas -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-[10px] font-bold uppercase">
+<span>Luxury Villas</span>
+<span>42%</span>
+</div>
+<div class="h-4 w-full flex bg-surface-container">
+<div class="bg-primary w-[42%] h-full"></div>
+<div class="bg-outline-variant w-[58%] h-full ml-[1px]"></div>
+</div>
+</div>
+<!-- Commercial -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-[10px] font-bold uppercase">
+<span>Commercial Space</span>
+<span>21%</span>
+</div>
+<div class="h-4 w-full flex bg-surface-container">
+<div class="bg-primary w-[21%] h-full"></div>
+<div class="bg-outline-variant w-[79%] h-full ml-[1px]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Geographic & Sentiment Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Geographic Hotspots -->
+<div class="bg-surface-container-lowest p-8 border border-outline-variant/10">
+<h3 class="text-xs font-black uppercase tracking-widest text-primary mb-6">Geographic Hotspots</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/10">
+<div>
+<p class="text-[11px] font-bold text-primary uppercase">Jubilee Hills</p>
+<p class="text-[9px] text-on-surface-variant uppercase">Hyderabad Central</p>
+</div>
+<div class="text-right">
+<p class="text-[11px] font-black text-primary">412 Leads</p>
+<p class="text-[9px] text-primary-fixed font-bold uppercase">Top Growth</p>
+</div>
+</div>
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/10">
+<div>
+<p class="text-[11px] font-bold text-primary uppercase">HSR Layout</p>
+<p class="text-[9px] text-on-surface-variant uppercase">Bangalore South</p>
+</div>
+<div class="text-right">
+<p class="text-[11px] font-black text-primary">289 Leads</p>
+<p class="text-[9px] text-on-surface-variant uppercase">Steady</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-[11px] font-bold text-primary uppercase">Whitefield</p>
+<p class="text-[9px] text-on-surface-variant uppercase">Bangalore East</p>
+</div>
+<div class="text-right">
+<p class="text-[11px] font-black text-primary">194 Leads</p>
+<p class="text-[9px] text-error font-bold uppercase">-2.1%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sentiment Breakdown -->
+<div class="bg-surface-container-lowest p-8 border border-outline-variant/10">
+<h3 class="text-xs font-black uppercase tracking-widest text-primary mb-6">Sentiment Spectrum</h3>
+<div class="relative h-20 flex items-end gap-1 mb-6">
+<div class="flex-1 bg-surface-container h-1/4 rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container h-1/2 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed h-[90%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed h-full rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed h-[85%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed/40 h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container h-1/3 rounded-t-sm"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-tighter">
+<span class="text-on-surface-variant">Critical</span>
+<span class="text-primary-fixed px-3 py-1 bg-primary-fixed/5 rounded-full">Modal Flow: Positive</span>
+<span class="text-on-surface-variant">Exultant</span>
+</div>
+<p class="text-[9px] text-on-surface-variant mt-6 italic">"Strong interest in long-term capital appreciation over immediate rental yields."</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 z-50 flex w-full items-center justify-around bg-surface-container-lowest/85 py-4 backdrop-blur-md border-t border-outline-variant/20 md:hidden">
+<a class="flex flex-col items-center gap-1 scale-110 text-primary-fixed" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="font-['Inter'] text-[9px] uppercase font-bold">Analytics</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Inter'] text-[9px] uppercase font-bold">Leads</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-['Inter'] text-[9px] uppercase font-bold">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant opacity-60" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[9px] uppercase font-bold">Config</span>
+</a>
+</nav>
+<!-- FAB (Contextual) -->
+<button class="fixed bottom-24 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary-fixed to-primary-fixed-dim text-white shadow-lg md:bottom-8 md:right-8 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+</body></html>

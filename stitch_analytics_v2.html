@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EstateIntelligence | Lead Management Dashboard</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "primary-container": "#4f46e5",
+                        "tertiary-container": "#526174",
+                        "on-primary-container": "#dad7ff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#cddcf3",
+                        "surface-bright": "#f7f9fb",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "background": "#f7f9fb",
+                        "primary": "#3525cd",
+                        "outline-variant": "#c7c4d8",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "secondary-container": "#d5e0f8",
+                        "on-tertiary-fixed": "#0d1c2d",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#464555",
+                        "tertiary-fixed": "#d4e4fa",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary-fixed": "#d8e3fb",
+                        "surface-container-low": "#f2f4f6",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-container": "#586377",
+                        "outline": "#777587",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary": "#3b495b",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "secondary": "#545f73",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-tint": "#4d44e3",
+                        "on-surface": "#191c1e",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-background": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#bcc7de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.8rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .glass-nav {
+            background: rgba(247, 249, 251, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- SideNavBar (Authority: Shared Components JSON) -->
+<aside class="hidden md:flex h-screen w-72 flex-col fixed left-0 top-0 bg-[#ffffff] dark:bg-slate-950 shadow-[20px_0_40px_rgba(25,28,30,0.04)] z-50 p-4 space-y-2">
+<div class="flex items-center space-x-3 px-4 py-8">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-[#191c1e] dark:text-white leading-tight">Global Realty</h1>
+<p class="text-xs font-medium text-on-surface-variant/70 tracking-wide uppercase">Luxury Division</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active Tab: Leads -->
+<a class="flex items-center px-4 py-3 bg-gradient-to-r from-[#3525cd] to-[#4f46e5] text-white rounded-lg shadow-lg shadow-[#3525cd]/20 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="groups">groups</span>
+<span class="font-['Inter'] text-sm font-medium tracking-normal">Leads</span>
+</a>
+<a class="flex items-center px-4 py-3 text-[#464555] dark:text-slate-400 hover:bg-[#f2f4f6] dark:hover:bg-slate-800 rounded-lg hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="domain">domain</span>
+<span class="font-['Inter'] text-sm font-medium tracking-normal">Properties</span>
+</a>
+<a class="flex items-center px-4 py-3 text-[#464555] dark:text-slate-400 hover:bg-[#f2f4f6] dark:hover:bg-slate-800 rounded-lg hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="leaderboard">leaderboard</span>
+<span class="font-['Inter'] text-sm font-medium tracking-normal">Analytics</span>
+</a>
+<a class="flex items-center px-4 py-3 text-[#464555] dark:text-slate-400 hover:bg-[#f2f4f6] dark:hover:bg-slate-800 rounded-lg hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-sm font-medium tracking-normal">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 border-t border-outline-variant/10 pt-4">
+<button class="w-full flex items-center justify-center py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:scale-[1.02] active:scale-95 transition-transform mb-4">
+                Add New Lead
+            </button>
+<a class="flex items-center px-4 py-2 text-[#464555] text-sm hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="headset_mic">headset_mic</span>
+                Support
+            </a>
+<a class="flex items-center px-4 py-2 text-[#464555] text-sm hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="help">help</span>
+                Help Center
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 min-h-screen">
+<!-- TopAppBar (Authority: Shared Components JSON) -->
+<header class="bg-[#f7f9fb]/85 dark:bg-slate-900/85 backdrop-blur-xl sticky top-0 z-40 shadow-sm flex justify-between items-center w-full px-8 py-4">
+<div class="flex items-center space-x-8">
+<span class="text-xl font-bold tracking-tighter text-[#3525cd] dark:text-[#4f46e5]">EstateIntelligence</span>
+<div class="hidden lg:flex items-center space-x-6">
+<a class="text-[#3525cd] dark:text-[#4f46e5] font-semibold border-b-2 border-[#3525cd] py-1" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#3525cd] transition-colors duration-200" href="#">Pipeline</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#3525cd] transition-colors duration-200" href="#">Inventory</a>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-2 mr-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</button>
+</div>
+<img alt="Agent profile avatar" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" data-alt="professional male real estate agent headshot with warm friendly smile in corporate attire, bright modern office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5qhayEWIzfPfl8hhoh3hZ1H7RDN2myplg7OX4LPLGzF32WXa-s38i9MTJfyLAV5BhQtk1u4hOdsPJpAJlvftJ30wXyR1oI3QZjXapfsWY9wF3PFVRTax6r32VcYZFCKmvanI3XDa2MQpl-LA5lGLeLGBq7lJDnBcmRPvD0GYBeqqCRKlucCzTaOKOo2UEDfbph0SIQrwZhXCV1Vx6-zaynMaFOe9D-ug0qQN4QQDOOTMT-SAeO1H1Ij-w0F-8qytSizgE-b_1JqE"/>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 max-w-[1600px] mx-auto space-y-8">
+<!-- Summary Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-on-surface">Lead Overview</h2>
+<p class="text-on-surface-variant font-medium mt-1">Operational intelligence for Global Realty Luxury Division.</p>
+</div>
+<div class="flex space-x-3">
+<button class="flex items-center px-4 py-2 bg-surface-container-lowest text-primary font-semibold rounded-lg shadow-sm border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined mr-2 text-xl" data-icon="download">download</span> Export Data
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Total Leads -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/10 group hover:shadow-lg transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary/5 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<div class="text-xs font-bold text-primary px-2 py-1 bg-primary/10 rounded-full">+12%</div>
+</div>
+<p class="text-sm font-bold uppercase tracking-wider text-on-surface-variant mb-1">Total Leads</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-4xl font-bold tracking-tighter">209</span>
+</div>
+<!-- Sparkline Mockup -->
+<div class="mt-4 h-8 flex items-end space-x-1">
+<div class="w-full bg-primary/10 h-3 rounded-t-sm group-hover:h-5 transition-all"></div>
+<div class="w-full bg-primary/10 h-5 rounded-t-sm group-hover:h-3 transition-all"></div>
+<div class="w-full bg-primary/20 h-6 rounded-t-sm group-hover:h-8 transition-all"></div>
+<div class="w-full bg-primary/40 h-4 rounded-t-sm group-hover:h-6 transition-all"></div>
+<div class="w-full bg-primary h-8 rounded-t-sm"></div>
+</div>
+</div>
+<!-- Active Leads -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/10 group hover:shadow-lg transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container/20 rounded-lg text-secondary">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div class="text-xs font-bold text-secondary px-2 py-1 bg-secondary-container/30 rounded-full">High</div>
+</div>
+<p class="text-sm font-bold uppercase tracking-wider text-on-surface-variant mb-1">Active Leads</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-4xl font-bold tracking-tighter">29</span>
+</div>
+<div class="mt-4 h-8 flex items-end space-x-1">
+<div class="w-full bg-secondary-container h-4 rounded-t-sm"></div>
+<div class="w-full bg-secondary-container h-6 rounded-t-sm"></div>
+<div class="w-full bg-secondary-container h-5 rounded-t-sm"></div>
+<div class="w-full bg-secondary-container h-7 rounded-t-sm"></div>
+<div class="w-full bg-secondary-container h-6 rounded-t-sm"></div>
+</div>
+</div>
+<!-- New Leads -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/10 group hover:shadow-lg transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary-container/10 rounded-lg text-tertiary">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+</div>
+</div>
+<p class="text-sm font-bold uppercase tracking-wider text-on-surface-variant mb-1">New Leads</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-4xl font-bold tracking-tighter">1,488</span>
+</div>
+<div class="mt-4 h-8 flex items-end space-x-1 opacity-50">
+<div class="w-full bg-tertiary-container h-2 rounded-t-sm"></div>
+<div class="w-full bg-tertiary-container h-3 rounded-t-sm"></div>
+<div class="w-full bg-tertiary-container h-5 rounded-t-sm"></div>
+<div class="w-full bg-tertiary-container h-8 rounded-t-sm"></div>
+<div class="w-full bg-tertiary-container h-4 rounded-t-sm"></div>
+</div>
+</div>
+<!-- Conversion Rate -->
+<div class="bg-primary p-6 rounded-xl shadow-lg shadow-primary/20 text-white group relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10 scale-150 rotate-12">
+<span class="material-symbols-outlined text-9xl" data-icon="trending_up">trending_up</span>
+</div>
+<div class="relative z-10">
+<p class="text-sm font-bold uppercase tracking-wider text-primary-container mb-1">Conversion Rate</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-4xl font-extrabold tracking-tighter">73.2%</span>
+</div>
+<p class="text-xs mt-2 text-white/70">Historical average: 64%</p>
+<div class="mt-6 w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-white h-full w-[73.2%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary shadow-sm" placeholder="Search by name, email, or property..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+<div class="flex bg-surface-container-lowest rounded-lg p-1 shadow-sm">
+<button class="px-4 py-1.5 rounded-md text-sm font-semibold bg-primary text-white">All</button>
+<button class="px-4 py-1.5 rounded-md text-sm font-medium text-on-surface-variant hover:bg-surface-container-low">Active</button>
+<button class="px-4 py-1.5 rounded-md text-sm font-medium text-on-surface-variant hover:bg-surface-container-low">Inactive</button>
+</div>
+<button class="flex items-center px-4 py-2.5 bg-surface-container-lowest text-sm font-semibold text-on-surface-variant rounded-lg shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined mr-2 text-lg" data-icon="calendar_month">calendar_month</span>
+                        Last 30 Days
+                        <span class="material-symbols-outlined ml-2 text-lg" data-icon="expand_more">expand_more</span>
+</button>
+<button class="p-2.5 bg-surface-container-lowest text-on-surface-variant rounded-lg shadow-sm hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Lead Table -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-[0_20px_40px_rgba(25,28,30,0.04)] overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Lead Identity</th>
+<th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Contact Information</th>
+<th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant text-right">Engagement</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="px-8 h-[80px]">
+<span class="px-3 py-1 bg-[#4caf50]/10 text-[#2e7d32] text-xs font-bold rounded-full inline-flex items-center">
+<span class="w-1.5 h-1.5 rounded-full bg-[#4caf50] mr-2"></span>
+                                    Active
+                                </span>
+</td>
+<td class="px-8">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary font-bold">JB</div>
+<div>
+<div class="text-base font-bold text-on-surface">Julianne Belcourt</div>
+<div class="text-xs text-on-surface-variant">Lead ID: #LD-9420</div>
+</div>
+</div>
+</td>
+<td class="px-8">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-on-surface">+1 (555) 012-9938</span>
+<span class="text-xs text-on-surface-variant">j.belcourt@premium.com</span>
+</div>
+</td>
+<td class="px-8 text-right">
+<div class="flex items-center justify-end space-x-2">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="px-8 h-[80px]">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full inline-flex items-center">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-2 animate-pulse"></span>
+                                    Negotiating
+                                </span>
+</td>
+<td class="px-8">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary font-bold">MW</div>
+<div>
+<div class="text-base font-bold text-on-surface">Marcus Whitmore</div>
+<div class="text-xs text-on-surface-variant">Lead ID: #LD-8812</div>
+</div>
+</div>
+</td>
+<td class="px-8">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-on-surface">+1 (555) 441-0092</span>
+<span class="text-xs text-on-surface-variant">m.whitmore@arch.io</span>
+</div>
+</td>
+<td class="px-8 text-right">
+<div class="flex items-center justify-end space-x-2">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="px-8 h-[80px]">
+<span class="px-3 py-1 bg-error-container/20 text-error text-xs font-bold rounded-full inline-flex items-center">
+<span class="w-1.5 h-1.5 rounded-full bg-error mr-2"></span>
+                                    Inactive
+                                </span>
+</td>
+<td class="px-8">
+<div class="flex items-center space-x-4">
+<img alt="Client avatar" class="w-10 h-10 rounded-full object-cover" data-alt="close-up portrait of a professional woman with confident expression, neutral background, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC3LlYMjWEutsULy_keMdA8Pw6hGmc1sg5ADsov6KC4iKbFhb9Dx7Y_oQSp7i0lRJ5BxAnUBJcV5xKr6r3VBcS4w1PTEqVQDxJMeYHuZpVm6cpigUst6iN8eI1SaHzOMCv1WCTST5NSREfX2p_Pok4bb6kr5b9VnqzpG3neUS6ZwnoD1jGJj4eMd3WTDZfkuUwDfpTfaVmfMQKLZxMQTmkSw4mh29V85jZeQkG9fQdTXxrHkGwwAVdCXi_KqBTo236nNC3_kUe3KI"/>
+<div>
+<div class="text-base font-bold text-on-surface">Elena Rodriguez</div>
+<div class="text-xs text-on-surface-variant">Lead ID: #LD-7721</div>
+</div>
+</div>
+</td>
+<td class="px-8">
+<div class="flex flex-col opacity-60">
+<span class="text-sm font-semibold text-on-surface">+1 (555) 998-3321</span>
+<span class="text-xs text-on-surface-variant">elena.rod@lifestyle.com</span>
+</div>
+</td>
+<td class="px-8 text-right">
+<div class="flex items-center justify-end space-x-2">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="px-8 h-[80px]">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-bold rounded-full inline-flex items-center">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant mr-2"></span>
+                                    Closed
+                                </span>
+</td>
+<td class="px-8">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold">DS</div>
+<div>
+<div class="text-base font-bold text-on-surface">Daniel Sterling</div>
+<div class="text-xs text-on-surface-variant">Lead ID: #LD-4409</div>
+</div>
+</div>
+</td>
+<td class="px-8">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-on-surface">+1 (555) 122-8871</span>
+<span class="text-xs text-on-surface-variant">d.sterling@vantage.net</span>
+</div>
+</td>
+<td class="px-8 text-right">
+<div class="flex items-center justify-end space-x-2">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination / Footer -->
+<div class="px-8 py-4 bg-surface-container-low/30 border-t border-outline-variant/10 flex items-center justify-between">
+<p class="text-sm text-on-surface-variant font-medium">Showing <span class="text-on-surface">1-4</span> of 209 leads</p>
+<div class="flex space-x-2">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 bg-primary text-white text-sm font-bold rounded-lg">1</button>
+<button class="px-3 py-1 hover:bg-surface-container-high rounded-lg text-sm font-medium">2</button>
+<button class="px-3 py-1 hover:bg-surface-container-high rounded-lg text-sm font-medium">3</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for quick action (Dashboard Context) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-tr from-primary to-primary-container text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</body></html>
