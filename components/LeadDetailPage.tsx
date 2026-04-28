@@ -33,9 +33,12 @@ function sentimentPercent(sentiment: string, score: number): number {
     return score || 50;
 }
 
-function whatsappUrl(phone: string): string {
-    const d = phone.replace(/\D/g, '');
-    return `https://wa.me/${d.startsWith('91') && d.length > 10 ? d : '91' + d}`;
+function whatsappUrl(lead: VerifiedLead): string {
+    if (!lead.phone) return '#';
+    const d = lead.phone.replace(/\D/g, '');
+    const num = d.startsWith('91') && d.length > 10 ? d : '91' + d;
+    const message = `Hi ${lead.name}, these are the details: looking for a ${lead.propertyType || 'property'} in ${lead.preferredLocation || 'any location'} at a ${lead.budget || 'specified'} budget.`;
+    return `https://wa.me/${num}?text=${encodeURIComponent(message)}`;
 }
 
 // ── Copy-on-hover contact row ──────────────────────────────────────────────
@@ -172,7 +175,7 @@ const LeadDetailPage: React.FC<LeadDetailPageProps> = ({ lead, onBack, onUpdateS
                         )}
                         {lead.phone ? (
                             <a
-                                href={whatsappUrl(lead.phone)}
+                                href={whatsappUrl(lead)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl font-bold tracking-tight hover:bg-slate-50 transition-all shadow-sm text-sm"
